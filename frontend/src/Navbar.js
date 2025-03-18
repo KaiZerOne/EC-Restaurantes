@@ -12,7 +12,7 @@ function Navbar({ logout }) {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Inicio</a>
+                            <a className="nav-link" href="/#">Inicio</a>
                         </li>
                         <li className="nav-item">
                             <button className="btn btn-danger" onClick={logout}>Cerrar Sesión</button>
