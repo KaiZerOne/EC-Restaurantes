@@ -11,22 +11,27 @@ const FichajesDashboard = ({ token }) => {
     const [mostrarIncidencias, setMostrarIncidencias] = useState(false);
     const [restauranteSeleccionado, setRestauranteSeleccionado] = useState("");
     const [horasPorEmpleado, setHorasPorEmpleado] = useState([]);
+    const [horasTotalesPorEmpleado, setHorasTotalesPorEmpleado] = useState({});
 
     useEffect(() => {
         fetchFichajes();
-    }, []);
+    }, [filtroEmpleado, fechaDesde, fechaHasta, mostrarIncidencias, restauranteSeleccionado]);
+
 
     const fetchFichajes = async () => {
         try {
             const response = await axios.get("http://127.0.0.1:8000/api/fichajes/", {
-                headers: { Authorization: `Bearer ${token}` },
-                params: {
-                    empleado: filtroEmpleado,
-                    fecha: "", // Puedes extender esto a fechaDesde y fechaHasta
-                }
+                headers: { Authorization: `Bearer ${token}` }
             });
-            setFichajes(response.data);
-            procesarDatos(response.data);
+
+            const filtrados = response.data.filter(fichaje =>
+                fichaje.empleado?.username.toLowerCase().includes(filtroEmpleado.toLowerCase()) &&
+                (!mostrarIncidencias || fichaje.incidencia !== null) &&
+                (restauranteSeleccionado === "" || fichaje.restaurante.toString() === restauranteSeleccionado)
+            );
+
+            setFichajes(filtrados);
+            procesarDatos(filtrados);
         } catch (error) {
             console.error("Error al obtener fichajes:", error);
         }
@@ -49,21 +54,22 @@ const FichajesDashboard = ({ token }) => {
     };
 
     const procesarDatos = (data) => {
-        const horasPorEmpleadoAcumuladas = {};
+        const acumuladas = {};
         const coloresEmpleado = {};
 
         data.forEach((fichaje) => {
             const nombre = fichaje.empleado?.username || "Desconocido";
-            if (!horasPorEmpleadoAcumuladas[nombre]) {
-                horasPorEmpleadoAcumuladas[nombre] = 0;
+            acumuladas[nombre] = (acumuladas[nombre] || 0) + fichaje.horas_trabajadas;
+            if (!coloresEmpleado[nombre]) {
                 coloresEmpleado[nombre] = generarColorAleatorio();
             }
-            horasPorEmpleadoAcumuladas[nombre] += fichaje.horas_trabajadas;
         });
 
-        const chartData = Object.keys(horasPorEmpleadoAcumuladas).map((nombre) => ({
+        setHorasTotalesPorEmpleado(acumuladas);
+
+        const chartData = Object.keys(acumuladas).map((nombre) => ({
             name: nombre,
-            value: horasPorEmpleadoAcumuladas[nombre],
+            value: Math.round(acumuladas[nombre]),  // Total redondeado
             color: coloresEmpleado[nombre],
         }));
 
@@ -72,17 +78,11 @@ const FichajesDashboard = ({ token }) => {
 
     const obtenerNombreRestaurante = (id) => {
         switch (id) {
-            case 1: return "Armentioa";
-            case 2: return "La Marina";
+            case 1: return "La Marina";
+            case 2: return "Armentia";
             default: return "Desconocido";
         }
     };
-
-    const fichajesFiltrados = fichajes.filter(fichaje =>
-        fichaje.empleado?.username.toLowerCase().includes(filtroEmpleado.toLowerCase()) &&
-        (!mostrarIncidencias || fichaje.incidencia !== null) &&
-        (restauranteSeleccionado === "" || fichaje.restaurante.toString() === restauranteSeleccionado)
-    );
 
     return (
         <div className="container mt-4">
@@ -140,15 +140,15 @@ const FichajesDashboard = ({ token }) => {
                         onChange={(e) => setRestauranteSeleccionado(e.target.value)}
                     >
                         <option value="">Todos los restaurantes</option>
-                        <option value="1">Armentioa</option>
-                        <option value="2">La Marina</option>
+                        <option value="1">La Marina</option>
+                        <option value="2">Armentia</option>
                     </select>
                 </div>
             </div>
 
             {/* Gráfico Circular */}
             <div className="card shadow p-4 mb-4">
-                <h4 className="text-center">⏳ Horas Trabajadas por Empleado</h4>
+                <h4 className="text-center">⏳ Horas Totales Trabajadas</h4>
                 <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                         <Pie
@@ -158,13 +158,13 @@ const FichajesDashboard = ({ token }) => {
                             cx="50%"
                             cy="50%"
                             outerRadius={100}
-                            label
+                            label={({ name, value }) => `${name}: ${value}h`}
                         >
                             {horasPorEmpleado.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.color} />
                             ))}
                         </Pie>
-                        <Tooltip />
+                        <Tooltip formatter={(value) => [`${value}h`, "Total horas"]} />
                     </PieChart>
                 </ResponsiveContainer>
             </div>
@@ -178,25 +178,40 @@ const FichajesDashboard = ({ token }) => {
                             <th>📅 Entrada</th>
                             <th>📅 Salida</th>
                             <th>⏳ Horas</th>
+                            <th>🟰 Totales</th>
+                            <th>➕ Compensables</th>
                             <th>🏨 Restaurante</th>
                             <th>⚠️ Incidencia</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {fichajesFiltrados.length > 0 ? (
-                            fichajesFiltrados.map((fichaje) => (
-                                <tr key={fichaje.id}>
-                                    <td>{fichaje.empleado?.username || "Sin nombre"}</td>
-                                    <td>{new Date(fichaje.fecha_entrada).toLocaleString()}</td>
-                                    <td>{fichaje.fecha_salida ? new Date(fichaje.fecha_salida).toLocaleString() : "-"}</td>
-                                    <td>{formatearHoras(fichaje.horas_trabajadas)}</td>
-                                    <td>{obtenerNombreRestaurante(fichaje.restaurante)}</td>
-                                    <td>{fichaje.incidencia || "-"}</td>
-                                </tr>
-                            ))
+                        {fichajes.length > 0 ? (
+                            fichajes.map((fichaje) => {
+                                const nombre = fichaje.empleado?.username;
+                                const totalEmpleado = horasTotalesPorEmpleado[nombre] || 0;
+                                const contrato = fichaje.empleado?.horas_contrato || 40;
+                                const compensable = totalEmpleado - contrato;
+
+                                return (
+                                    <tr key={fichaje.id}>
+                                        <td>{nombre}</td>
+                                        <td>{new Date(fichaje.fecha_entrada).toLocaleString()}</td>
+                                        <td>{fichaje.fecha_salida ? new Date(fichaje.fecha_salida).toLocaleString() : "-"}</td>
+                                        <td>{formatearHoras(fichaje.horas_trabajadas)}</td>
+                                        <td>{formatearHoras(totalEmpleado)}</td>
+                                        <td style={{ color: compensable < 0 ? "red" : "green" }}>
+                                            {compensable >= 0
+                                                ? `+${formatearHoras(compensable)}`
+                                                : `-${formatearHoras(-compensable)}`}
+                                        </td>
+                                        <td>{obtenerNombreRestaurante(fichaje.restaurante)}</td>
+                                        <td>{fichaje.incidencia || "-"}</td>
+                                    </tr>
+                                );
+                            })
                         ) : (
                             <tr>
-                                <td colSpan="6" className="text-center text-danger fw-bold">⚠️ No hay fichajes.</td>
+                                <td colSpan="8" className="text-center text-danger fw-bold">⚠️ No hay fichajes.</td>
                             </tr>
                         )}
                     </tbody>
