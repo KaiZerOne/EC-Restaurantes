@@ -12,11 +12,11 @@ const FichajesDashboard = ({ token }) => {
     const [restauranteSeleccionado, setRestauranteSeleccionado] = useState("");
     const [horasPorEmpleado, setHorasPorEmpleado] = useState([]);
     const [horasTotalesPorEmpleado, setHorasTotalesPorEmpleado] = useState({});
+    const [totalFiltrado, setTotalFiltrado] = useState(null);  // 🆕 Total empleado filtrado
 
     useEffect(() => {
         fetchFichajes();
     }, [filtroEmpleado, fechaDesde, fechaHasta, mostrarIncidencias, restauranteSeleccionado]);
-
 
     const fetchFichajes = async () => {
         try {
@@ -24,11 +24,17 @@ const FichajesDashboard = ({ token }) => {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            const filtrados = response.data.filter(fichaje =>
-                fichaje.empleado?.username.toLowerCase().includes(filtroEmpleado.toLowerCase()) &&
-                (!mostrarIncidencias || fichaje.incidencia !== null) &&
-                (restauranteSeleccionado === "" || fichaje.restaurante.toString() === restauranteSeleccionado)
-            );
+            const filtrados = response.data.filter(fichaje => {
+                const nombreEmpleado = fichaje.empleado?.username.toLowerCase() || "";
+                const nombreFiltro = filtroEmpleado.trim().toLowerCase();
+
+                const coincideEmpleado = nombreEmpleado.includes(nombreFiltro);
+                const coincideIncidencia = !mostrarIncidencias || fichaje.incidencia !== null;
+                const coincideRestaurante = restauranteSeleccionado === "" || fichaje.restaurante.toString() === restauranteSeleccionado;
+
+                return coincideEmpleado && coincideIncidencia && coincideRestaurante;
+            });
+
 
             setFichajes(filtrados);
             procesarDatos(filtrados);
@@ -53,28 +59,42 @@ const FichajesDashboard = ({ token }) => {
         return color;
     };
 
-    const procesarDatos = (data) => {
-        const acumuladas = {};
-        const coloresEmpleado = {};
+const procesarDatos = (data) => {
+    const acumuladas = {};
+    const coloresEmpleado = {};
+    const horasContrato = {};
 
-        data.forEach((fichaje) => {
-            const nombre = fichaje.empleado?.username || "Desconocido";
-            acumuladas[nombre] = (acumuladas[nombre] || 0) + fichaje.horas_trabajadas;
-            if (!coloresEmpleado[nombre]) {
-                coloresEmpleado[nombre] = generarColorAleatorio();
-            }
-        });
+    data.forEach((fichaje) => {
+        const nombre = fichaje.empleado?.username || "Desconocido";
+        acumuladas[nombre] = (acumuladas[nombre] || 0) + fichaje.horas_trabajadas;
+        horasContrato[nombre] = fichaje.empleado?.horas_contrato || 40;  // ⚠️ real contrato
+        if (!coloresEmpleado[nombre]) {
+            coloresEmpleado[nombre] = generarColorAleatorio();
+        }
+    });
 
-        setHorasTotalesPorEmpleado(acumuladas);
+    setHorasTotalesPorEmpleado(acumuladas);
+    setTotalFiltrado(null);
 
-        const chartData = Object.keys(acumuladas).map((nombre) => ({
-            name: nombre,
-            value: Math.round(acumuladas[nombre]),  // Total redondeado
-            color: coloresEmpleado[nombre],
-        }));
+    const nombresFiltrados = Object.keys(acumuladas);
+        if (filtroEmpleado && nombresFiltrados.length === 1) {
+            const nombre = nombresFiltrados[0];
+            const totalHoras = acumuladas[nombre];
+            const contrato = data.find(f => f.empleado?.username === nombre)?.empleado?.horas_contrato || 0;
+            const saldo = totalHoras - contrato;
 
-        setHorasPorEmpleado(chartData);
-    };
+            setTotalFiltrado({ nombre, horas: totalHoras, contrato, saldo });
+        }
+
+    const chartData = Object.keys(acumuladas).map((nombre) => ({
+        name: nombre,
+        value: Math.round(acumuladas[nombre]),
+        color: coloresEmpleado[nombre],
+    }));
+
+    setHorasPorEmpleado(chartData);
+};
+
 
     const obtenerNombreRestaurante = (id) => {
         switch (id) {
@@ -115,9 +135,30 @@ const FichajesDashboard = ({ token }) => {
                         onChange={(e) => setFechaHasta(e.target.value)}
                     />
                 </div>
-                <div className="col-md-3">
-                    <button className="btn btn-primary w-100" onClick={fetchFichajes}>🔄 Filtrar</button>
+                <div className="row mb-3">
+                    <div className="col-md-12 text-end">
+                        <button
+                            className="btn btn-outline-danger"
+                            onClick={() => {
+                                setFiltroEmpleado("");
+                                setFechaDesde("");
+                                setFechaHasta("");
+                                setRestauranteSeleccionado("");
+                                setMostrarIncidencias(false);
+                                setTotalFiltrado(null);
+                                fetchFichajes();  // Opcional: recargar datos tras limpiar
+                            }}
+                        >
+                            🧹 Limpiar Filtros
+                        </button>
+                    </div>
                 </div>
+
+                <div className="col-md-3 d-flex gap-2">
+                    <button className="btn btn-primary w-100" onClick={fetchFichajes}>🔄 Filtrar</button>
+                    <button className="btn btn-secondary w-100" onClick={fetchFichajes}>🔄 Actualizar</button>
+                </div>
+
             </div>
 
             {/* Filtro por incidencia y restaurante */}
@@ -145,6 +186,17 @@ const FichajesDashboard = ({ token }) => {
                     </select>
                 </div>
             </div>
+
+            {totalFiltrado && (
+                <div className="alert alert-info text-center fw-bold">
+                    🧮 {totalFiltrado.nombre} trabajó <span className="text-primary">{formatearHoras(totalFiltrado.horas)}</span> esta semana.<br />
+                    Contrato: <span className="text-success">{formatearHoras(totalFiltrado.contrato)}</span> —
+                    Compensables: <span style={{ color: totalFiltrado.saldo < 0 ? "red" : "green" }}>
+                        {totalFiltrado.saldo >= 0 ? `+${formatearHoras(totalFiltrado.saldo)}` : `-${formatearHoras(-totalFiltrado.saldo)}`}
+                    </span>
+                </div>
+            )}
+
 
             {/* Gráfico Circular */}
             <div className="card shadow p-4 mb-4">
@@ -178,32 +230,22 @@ const FichajesDashboard = ({ token }) => {
                             <th>📅 Entrada</th>
                             <th>📅 Salida</th>
                             <th>⏳ Horas</th>
-                            <th>🟰 Totales</th>
-                            <th>➕ Compensables</th>
                             <th>🏨 Restaurante</th>
                             <th>⚠️ Incidencia</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {fichajes.length > 0 ? (
                             fichajes.map((fichaje) => {
-                                const nombre = fichaje.empleado?.username;
-                                const totalEmpleado = horasTotalesPorEmpleado[nombre] || 0;
-                                const contrato = fichaje.empleado?.horas_contrato || 40;
-                                const compensable = totalEmpleado - contrato;
+                                const horasTrabajadas = fichaje.horas_trabajadas || 0;
 
                                 return (
                                     <tr key={fichaje.id}>
-                                        <td>{nombre}</td>
+                                        <td>{fichaje.empleado?.username}</td>
                                         <td>{new Date(fichaje.fecha_entrada).toLocaleString()}</td>
                                         <td>{fichaje.fecha_salida ? new Date(fichaje.fecha_salida).toLocaleString() : "-"}</td>
-                                        <td>{formatearHoras(fichaje.horas_trabajadas)}</td>
-                                        <td>{formatearHoras(totalEmpleado)}</td>
-                                        <td style={{ color: compensable < 0 ? "red" : "green" }}>
-                                            {compensable >= 0
-                                                ? `+${formatearHoras(compensable)}`
-                                                : `-${formatearHoras(-compensable)}`}
-                                        </td>
+                                        <td>{formatearHoras(horasTrabajadas)}</td>
                                         <td>{obtenerNombreRestaurante(fichaje.restaurante)}</td>
                                         <td>{fichaje.incidencia || "-"}</td>
                                     </tr>
@@ -211,7 +253,7 @@ const FichajesDashboard = ({ token }) => {
                             })
                         ) : (
                             <tr>
-                                <td colSpan="8" className="text-center text-danger fw-bold">⚠️ No hay fichajes.</td>
+                                <td colSpan="6" className="text-center text-danger fw-bold">⚠️ No hay fichajes.</td>
                             </tr>
                         )}
                     </tbody>

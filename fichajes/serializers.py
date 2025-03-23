@@ -6,7 +6,7 @@ from .models import Fichaje
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['id', 'username', 'apellido']
+        fields = ['id', 'username', 'apellido' , 'horas_contrato']
 
 class FichajeSerializer(serializers.ModelSerializer):
     empleado = UserSerializer()  # 🔧 Serializa datos del empleado
