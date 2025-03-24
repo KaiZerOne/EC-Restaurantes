@@ -70,3 +70,24 @@ class ConfiguracionAcceso(models.Model):
 
     def __str__(self):
         return "Contraseña de Acceso al Panel"
+
+class ResumenMensual(models.Model):
+    empleado = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE, null=True)
+    mes = models.IntegerField()  # 1 a 12
+    anio = models.IntegerField()
+    horas_trabajadas = models.FloatField()
+    horas_contrato = models.FloatField()
+    horas_compensables = models.FloatField()
+
+    creado = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.empleado.username} - {self.mes}/{self.anio}"
+
+
+class BackupConfig(models.Model):
+    correo_destino = models.EmailField("Correo para backups")
+
+    def __str__(self):
+        return f"Backup a: {self.correo_destino}"

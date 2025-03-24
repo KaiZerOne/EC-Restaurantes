@@ -4,8 +4,7 @@ from django.contrib import admin, messages
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.html import format_html
 from django.utils.timezone import now
-
-from .models import Fichaje, ConfiguracionAcceso
+from .models import Fichaje, ConfiguracionAcceso, ResumenMensual, BackupConfig
 
 
 @admin.register(Fichaje)
@@ -75,3 +74,12 @@ def compensar_horas(request, fichaje_id):
     fichaje.save()
     messages.success(request, f"Horas compensadas de {fichaje.empleado.username}.")
     return redirect("/admin/fichajes/fichaje/")
+
+@admin.register(ResumenMensual)
+class ResumenMensualAdmin(admin.ModelAdmin):
+    list_display = ('empleado', 'restaurante', 'mes', 'anio', 'horas_trabajadas', 'horas_contrato', 'horas_compensables', 'creado')
+    list_filter = ('mes', 'anio', 'restaurante')
+
+@admin.register(BackupConfig)
+class BackupConfigAdmin(admin.ModelAdmin):
+    list_display = ('correo_destino',)
