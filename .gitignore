@@ -1,0 +1,24 @@
+# Entorno virtual
+.venv/
+venv/
+
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de entorno/Django
+.env
+db.sqlite3
+logs/
+
+# Archivos de Node/React (si usas frontend separado)
+node_modules/
+build/
+dist/
+
+# Archivos de editor/IDE
+.vscode/
+.idea/
+.DS_Store
