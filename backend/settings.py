@@ -95,6 +95,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+
 # 🌍 CORS (Frontend React)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
