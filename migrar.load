@@ -1,0 +1,10 @@
+LOAD DATABASE
+     FROM sqlite:///Users/kaizerone/Documents/EC-Restaurantes/db.sqlite3
+     INTO postgresql://admin_user:xDxKCV72MvgsKvFLx1R5MxSw6EnZGARk@dpg-cvgtl3bv2p9s73fvto0g-a.frankfurt-postgres.render.com:5432/grupogallinero?sslmode=require
+
+WITH include no drop, create tables, reset sequences, data only
+
+CAST type datetime to timestamptz using zero-dates-to-null,type date to date using zero-dates-to-null
+
+SET work_mem to '16MB', maintenance_work_mem to '512 MB';
+
