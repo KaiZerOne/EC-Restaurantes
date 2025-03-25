@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 
-
-# 1. Instala backend
+# 1. Backend
 pip install -r requirements.txt
-
-# 2. Migraciones y collectstatic
 python manage.py migrate
 python manage.py collectstatic --noinput
 
-# 3. Construye frontend
+# 2. Frontend
 cd frontend
 npm install
 npm run build
-
-# 4. Copia React al directorio estático final
 cd ..
-mkdir -p staticfiles  # por si acaso
+
+# 3. Copia build a staticfiles
+mkdir -p staticfiles
 cp -r frontend/build/* staticfiles/
