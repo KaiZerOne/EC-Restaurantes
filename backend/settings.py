@@ -105,6 +105,7 @@ CORS_ALLOWED_ORIGINS = [
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Opcional si tienes frontend compilado
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # 🌐 Internacionalización
