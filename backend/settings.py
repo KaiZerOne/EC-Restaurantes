@@ -106,6 +106,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles/static')]  # <-- dentro del build de React
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # lo que se sirve en producción
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "staticfiles")]
 
 # 🌐 Internacionalización
 LANGUAGE_CODE = 'es-es'
