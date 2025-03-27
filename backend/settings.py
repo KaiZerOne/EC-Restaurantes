@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "fallback-key")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ["*"]
 
-# Apps
+# 🧩 Aplicaciones
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,11 +30,11 @@ INSTALLED_APPS = [
     "restaurantes",
 ]
 
-# Middleware
+# 🧱 Middleware
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # ⚪️ Static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Static files
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -48,7 +48,7 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'staticfiles')],
+        "DIRS": [os.path.join(BASE_DIR, "staticfiles")],  # Donde estará index.html de React
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -63,19 +63,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-# 📦 Base de Datos PostgreSQL
+# 📦 Base de datos PostgreSQL
 DATABASES = {
     "default": dj_database_url.config(
         default=os.getenv("DATABASE_URL"),
         conn_max_age=600,
-        ssl_require=True  # Render requiere SSL
+        ssl_require=True
     )
 }
 
-# 🔑 Usuarios personalizados
+# 🔑 Usuario personalizado
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
-# REST y JWT
+# 🔐 API y JWT
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -95,20 +95,17 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-
-# 🌍 CORS (Frontend React)
+# 🌍 CORS
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
 
-# 🗂️ Static files
 # 📁 Archivos estáticos
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles/static')]  # <-- dentro del build de React
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # lo que se sirve en producción
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles')]
 
 # 🌐 Internacionalización
 LANGUAGE_CODE = 'es-es'
@@ -116,7 +113,7 @@ TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_TZ = True
 
-# 📧 Email (Gmail SMTP)
+# 📧 Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -125,7 +122,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# 🔎 Logging
+# 📋 Logging
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOG_DIR, exist_ok=True)
 LOGGING = {
