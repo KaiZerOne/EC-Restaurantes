@@ -20,7 +20,7 @@ router.register(r'detalles-pedido', DetallePedidoViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    path("", TemplateView.as_view(template_name="index.html")),
     path("fichajes/", include("fichajes.urls")),
     path("api/", include(router.urls)),
     path("api/", include("usuarios.urls")),

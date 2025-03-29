@@ -103,10 +103,14 @@ CORS_ALLOWED_ORIGINS = [
 
 # 📁 Archivos estáticos
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles/static')]  # <-- dentro del build de React
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # lo que se sirve en producción
+
+STATICFILES_DIRS = []  # no lo necesitas si usas STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "staticfiles")]
+
 
 # 🌐 Internacionalización
 LANGUAGE_CODE = 'es-es'
