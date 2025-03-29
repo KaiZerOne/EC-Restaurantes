@@ -109,7 +109,7 @@ STATICFILES_DIRS = [str(BASE_DIR / 'staticfiles' / 'static')]
 STATIC_ROOT = str(BASE_DIR / 'staticfiles_collected')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Templates (React index.html)
-TEMPLATES[0]['DIRS'] = [str(BASE_DIR / 'staticfiles' / 'static')]
+TEMPLATES[0]['DIRS'] = [str(BASE_DIR / 'staticfiles')]
 
 # 🌐 Internacionalización
 LANGUAGE_CODE = 'es-es'
