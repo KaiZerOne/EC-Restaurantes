@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-# 1. Instalar dependencias backend
+# 1. Instala backend Python
 pip install -r requirements.txt
 
-# 2. Migraciones (Django)
+# 2. Aplica migraciones de Django
 python manage.py migrate
 
-# 🧹 Limpiar carpeta antigua de estáticos
+# 3. Borra y crea carpetas necesarias
 rm -rf staticfiles
-mkdir staticfiles
+mkdir -p staticfiles/static
 
-# 3. Construir frontend React
+# 4. Construye el frontend (React)
 cd frontend
 npm install
 npm run build
 
-# 4. Copiar todo lo generado (build completo) a staticfiles
+# 5. Copia el contenido de React build a staticfiles/static
 cd ..
-cp -r frontend/build/* staticfiles/
+cp -r frontend/build/* staticfiles/static/
