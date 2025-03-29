@@ -102,23 +102,14 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # 📁 Archivos estáticos
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Archivos estáticos
 STATIC_URL = '/static/'
-
-# Aquí es donde está el contenido del build de React (copiado por el build.sh)
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles/static')]
-
-# Donde Django copiará los archivos estáticos al correr collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_collected')
-
-# WhiteNoise para servir estáticos comprimidos en producción
+STATICFILES_DIRS = [str(BASE_DIR / 'staticfiles' / 'static')]
+STATIC_ROOT = str(BASE_DIR / 'staticfiles_collected')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Templates (React index.html)
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'staticfiles/static')]
-
-
-
+TEMPLATES[0]['DIRS'] = [str(BASE_DIR / 'staticfiles' / 'static')]
 
 # 🌐 Internacionalización
 LANGUAGE_CODE = 'es-es'

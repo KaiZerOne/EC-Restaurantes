@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
 
-# 1. Instala backend Python
+# Backend: instalar dependencias
 pip install -r requirements.txt
 
-# 2. Aplica migraciones de Django
+# Migraciones
 python manage.py migrate
 
-# 3. Borra y crea carpetas necesarias
-rm -rf staticfiles
-mkdir -p staticfiles/static
-
-# 4. Construye el frontend (React)
+# Frontend
 cd frontend
 npm install
 npm run build
-
-# 5. Copia el contenido de React build a staticfiles/static
 cd ..
+
+# ⚠️ Creamos la estructura correcta
+mkdir -p staticfiles/static
+
+# Copiamos el *contenido entero del build*
 cp -r frontend/build/* staticfiles/static/
+
+# Static collect (Django lo moverá a staticfiles_collected)
+python manage.py collectstatic --noinput
