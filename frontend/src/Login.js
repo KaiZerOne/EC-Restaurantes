@@ -6,16 +6,17 @@ function Login({ setToken }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/token/", {
-                username,
-                password
-            });
+        const response = await axios.post(`${API_URL}/token/`, {
+            username,
+            password
+        });
 
             const accessToken = response.data.access;  // 📌 Guardamos el token de acceso
             setToken(accessToken);
