@@ -1,0 +1,953 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 6,
+    "codename": "add_usuario"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 6,
+    "codename": "change_usuario"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 6,
+    "codename": "delete_usuario"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 6,
+    "codename": "view_usuario"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add fichaje",
+    "content_type": 7,
+    "codename": "add_fichaje"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change fichaje",
+    "content_type": 7,
+    "codename": "change_fichaje"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete fichaje",
+    "content_type": 7,
+    "codename": "delete_fichaje"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view fichaje",
+    "content_type": 7,
+    "codename": "view_fichaje"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add categoria",
+    "content_type": 8,
+    "codename": "add_categoria"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change categoria",
+    "content_type": 8,
+    "codename": "change_categoria"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete categoria",
+    "content_type": 8,
+    "codename": "delete_categoria"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view categoria",
+    "content_type": 8,
+    "codename": "view_categoria"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add email config",
+    "content_type": 9,
+    "codename": "add_emailconfig"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change email config",
+    "content_type": 9,
+    "codename": "change_emailconfig"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete email config",
+    "content_type": 9,
+    "codename": "delete_emailconfig"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view email config",
+    "content_type": 9,
+    "codename": "view_emailconfig"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add pedido",
+    "content_type": 10,
+    "codename": "add_pedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change pedido",
+    "content_type": 10,
+    "codename": "change_pedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete pedido",
+    "content_type": 10,
+    "codename": "delete_pedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view pedido",
+    "content_type": 10,
+    "codename": "view_pedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add proveedor",
+    "content_type": 11,
+    "codename": "add_proveedor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change proveedor",
+    "content_type": 11,
+    "codename": "change_proveedor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete proveedor",
+    "content_type": 11,
+    "codename": "delete_proveedor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view proveedor",
+    "content_type": 11,
+    "codename": "view_proveedor"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add producto",
+    "content_type": 12,
+    "codename": "add_producto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change producto",
+    "content_type": 12,
+    "codename": "change_producto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete producto",
+    "content_type": 12,
+    "codename": "delete_producto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view producto",
+    "content_type": 12,
+    "codename": "view_producto"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add detalle pedido",
+    "content_type": 13,
+    "codename": "add_detallepedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change detalle pedido",
+    "content_type": 13,
+    "codename": "change_detallepedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete detalle pedido",
+    "content_type": 13,
+    "codename": "delete_detallepedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view detalle pedido",
+    "content_type": 13,
+    "codename": "view_detallepedido"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add restaurante",
+    "content_type": 14,
+    "codename": "add_restaurante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change restaurante",
+    "content_type": 14,
+    "codename": "change_restaurante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete restaurante",
+    "content_type": 14,
+    "codename": "delete_restaurante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view restaurante",
+    "content_type": 14,
+    "codename": "view_restaurante"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add configuracion acceso",
+    "content_type": 15,
+    "codename": "add_configuracionacceso"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change configuracion acceso",
+    "content_type": 15,
+    "codename": "change_configuracionacceso"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete configuracion acceso",
+    "content_type": 15,
+    "codename": "delete_configuracionacceso"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view configuracion acceso",
+    "content_type": 15,
+    "codename": "view_configuracionacceso"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add resumen mensual",
+    "content_type": 16,
+    "codename": "add_resumenmensual"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change resumen mensual",
+    "content_type": 16,
+    "codename": "change_resumenmensual"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete resumen mensual",
+    "content_type": 16,
+    "codename": "delete_resumenmensual"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view resumen mensual",
+    "content_type": 16,
+    "codename": "view_resumenmensual"
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Encargados",
+    "permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$cHUxc3jfMG3Nzekpz5cUVQ$7CAYl9XrnstnquwVs2/jWI4RuQSKWIl16TzLlu5PI7E=",
+    "last_login": "2025-03-18T21:00:39Z",
+    "is_superuser": true,
+    "username": "FranAdmin",
+    "first_name": "",
+    "last_name": "",
+    "email": "Franqueza7@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-03-13T14:54:31Z",
+    "dni": "",
+    "nombre": "",
+    "apellido": "",
+    "telefono": null,
+    "correo": null,
+    "restaurante": null,
+    "rol": "",
+    "horas_contrato": null,
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 2,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Tania",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-13T15:46:25.144Z",
+    "dni": "X1234567X",
+    "nombre": null,
+    "apellido": "Bratislava",
+    "telefono": "1234567890",
+    "correo": "",
+    "restaurante": 2,
+    "rol": "empleado",
+    "horas_contrato": 10,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 3,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Fran",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-15T16:35:58.407Z",
+    "dni": "58500022Z",
+    "nombre": null,
+    "apellido": "Quezada",
+    "telefono": "989898989",
+    "correo": "",
+    "restaurante": 2,
+    "rol": "empleado",
+    "horas_contrato": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 4,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Maria",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-18T21:22:25.775Z",
+    "dni": "01234567E",
+    "nombre": null,
+    "apellido": "La del barrio",
+    "telefono": "",
+    "correo": "",
+    "restaurante": 2,
+    "rol": "empleado",
+    "horas_contrato": 20,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$aWFfE9CDxFRYIG1DLpVQDp$3rOdXeN4L1hFHcM1FHpfe/JJhauRqAHg30vQXeyzw2g=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "jose",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-20T21:01:34.446Z",
+    "dni": "12345678J",
+    "nombre": null,
+    "apellido": null,
+    "telefono": null,
+    "correo": null,
+    "restaurante": 1,
+    "rol": "",
+    "horas_contrato": 20,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "usuarios.usuario",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$VhrlIIJJO4rQ72Ijni5NlW$g370FB1FSJFRZPnKAaIEl8MH17uBXzo3zrJVNFig7Hs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ana",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-20T21:01:34.638Z",
+    "dni": "87654321A",
+    "nombre": null,
+    "apellido": null,
+    "telefono": null,
+    "correo": null,
+    "restaurante": 1,
+    "rol": "",
+    "horas_contrato": 25,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 9,
+  "fields": {
+    "empleado": 5,
+    "restaurante": 1,
+    "fecha_entrada": "2025-03-21T07:30:00Z",
+    "fecha_salida": "2025-03-21T11:30:00Z",
+    "duracion": "04:00:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 10,
+  "fields": {
+    "empleado": 6,
+    "restaurante": 1,
+    "fecha_entrada": "2025-03-21T08:00:00Z",
+    "fecha_salida": "2025-03-21T12:15:00Z",
+    "duracion": "04:15:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 11,
+  "fields": {
+    "empleado": 5,
+    "restaurante": 1,
+    "fecha_entrada": "2025-03-21T07:30:00Z",
+    "fecha_salida": "2025-03-21T11:30:00Z",
+    "duracion": "04:00:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 12,
+  "fields": {
+    "empleado": 6,
+    "restaurante": 1,
+    "fecha_entrada": "2025-03-21T08:00:00Z",
+    "fecha_salida": "2025-03-21T12:15:00Z",
+    "duracion": "04:15:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 13,
+  "fields": {
+    "empleado": 2,
+    "restaurante": 2,
+    "fecha_entrada": "2025-03-20T07:00:00Z",
+    "fecha_salida": "2025-03-20T11:00:00Z",
+    "duracion": "04:00:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 14,
+  "fields": {
+    "empleado": 3,
+    "restaurante": 2,
+    "fecha_entrada": "2025-03-20T13:00:00Z",
+    "fecha_salida": "2025-03-20T17:00:00Z",
+    "duracion": "04:00:00",
+    "compensado": false,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.fichaje",
+  "pk": 15,
+  "fields": {
+    "empleado": 4,
+    "restaurante": 2,
+    "fecha_entrada": "2025-03-20T08:00:00Z",
+    "fecha_salida": "2025-03-20T12:30:00Z",
+    "duracion": "04:30:00",
+    "compensado": true,
+    "automatica": false,
+    "incidencia": null
+  }
+},
+{
+  "model": "fichajes.configuracionacceso",
+  "pk": 1,
+  "fields": {
+    "contrasenia_panel": "12345678"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 1,
+  "fields": {
+    "empleado": 2,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.0,
+    "horas_contrato": 10.0,
+    "horas_compensables": -6.0,
+    "creado": "2025-03-24T19:40:52.965Z"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 2,
+  "fields": {
+    "empleado": 3,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.0,
+    "horas_contrato": 0.0,
+    "horas_compensables": 4.0,
+    "creado": "2025-03-24T19:40:52.967Z"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 3,
+  "fields": {
+    "empleado": 4,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.5,
+    "horas_contrato": 20.0,
+    "horas_compensables": -15.5,
+    "creado": "2025-03-24T19:40:52.968Z"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 4,
+  "fields": {
+    "empleado": 2,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.0,
+    "horas_contrato": 10.0,
+    "horas_compensables": -6.0,
+    "creado": "2025-03-24T19:42:08.670Z"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 5,
+  "fields": {
+    "empleado": 3,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.0,
+    "horas_contrato": 0.0,
+    "horas_compensables": 4.0,
+    "creado": "2025-03-24T19:42:08.671Z"
+  }
+},
+{
+  "model": "fichajes.resumenmensual",
+  "pk": 6,
+  "fields": {
+    "empleado": 4,
+    "restaurante": 2,
+    "mes": 3,
+    "anio": 2025,
+    "horas_trabajadas": 4.5,
+    "horas_contrato": 20.0,
+    "horas_compensables": -15.5,
+    "creado": "2025-03-24T19:42:08.672Z"
+  }
+},
+{
+  "model": "restaurantes.restaurante",
+  "pk": 1,
+  "fields": {
+    "nombre": "La Marina",
+    "email": null,
+    "telefono": "123456789",
+    "direccion": "Calle A, 123"
+  }
+},
+{
+  "model": "restaurantes.restaurante",
+  "pk": 2,
+  "fields": {
+    "nombre": "Armentia",
+    "email": null,
+    "telefono": "987654321",
+    "direccion": "Calle B, 456"
+  }
+}
+]
