@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { API } from "../config";
+import { API } from "./config";
 
 const FichajesDashboard = ({ token }) => {
     const [fichajes, setFichajes] = useState([]);

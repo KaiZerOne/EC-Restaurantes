@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API } from "../config";
+import { API } from "./config";
 
 function NuevoEmpleado() {
     const [formData, setFormData] = useState({
