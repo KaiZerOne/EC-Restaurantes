@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API } from "../config";
+
 
 function Fichar() {
     const [dni, setDni] = useState("");
@@ -10,8 +12,8 @@ function Fichar() {
         setMensaje("");
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/fichar/", { dni });
-            setMensaje(response.data.mensaje);
+        const response = await axios.post(API.FICHAR, { dni });
+        setMensaje(response.data.mensaje);
         } catch (error) {
             setMensaje(error.response?.data?.error || "Error al fichar.");
         }

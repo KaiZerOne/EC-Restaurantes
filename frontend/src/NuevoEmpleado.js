@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API } from "../config";
 
 function NuevoEmpleado() {
     const [formData, setFormData] = useState({
@@ -30,14 +31,14 @@ function NuevoEmpleado() {
 
     // Obtener los restaurantes desde la API
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/restaurantes/", {
+          axios.get(API.RESTAURANTES, {
             headers: { Authorization: `Bearer ${token}` }
-        })
-        .then(response => {
+          })
+          .then(response => {
             if (response.data.length > 0) {
-                setRestaurantes(response.data);  // 📌 Si hay datos en la API, usamos esos
+              setRestaurantes(response.data);
             }
-        })
+          })
         .catch(error => {
             console.error("Error al obtener restaurantes, usando valores predeterminados:", error);
         });

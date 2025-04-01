@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API } from "../config"; // 👈 Importamos las rutas
 import "../styles/modal.css";
 
 function ContraseniaModal({ mostrar, onVerificada, onCancelar }) {
@@ -14,7 +15,7 @@ function ContraseniaModal({ mostrar, onVerificada, onCancelar }) {
 
   const verificarContrasenia = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/validar-panel/", {
+      const response = await fetch(API.VALIDAR_PANEL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
@@ -32,11 +33,8 @@ function ContraseniaModal({ mostrar, onVerificada, onCancelar }) {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      verificarContrasenia();
-    } else if (e.key === "Escape") {
-      onCancelar();  // ✅ Cierra con ESC
-    }
+    if (e.key === "Enter") verificarContrasenia();
+    else if (e.key === "Escape") onCancelar();
   };
 
   if (!mostrar) return null;
@@ -44,12 +42,7 @@ function ContraseniaModal({ mostrar, onVerificada, onCancelar }) {
   return (
     <div className="modal-backdrop">
       <div className="modal-content p-4 bg-white rounded shadow position-relative">
-        {/* ❌ Botón cerrar modal */}
-        <button
-          className="btn-close position-absolute top-0 end-0 m-3"
-          onClick={onCancelar}
-        ></button>
-
+        <button className="btn-close position-absolute top-0 end-0 m-3" onClick={onCancelar}></button>
         <h4 className="mb-3">🔒 Introduce contraseña</h4>
         <input
           type="password"
