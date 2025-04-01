@@ -80,7 +80,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
 }
 
@@ -96,9 +96,14 @@ SIMPLE_JWT = {
 
 # 🌍 CORS
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "https://www.grupogallinero.com",  # tu frontend en producción
     "http://127.0.0.1:3000",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://www.grupogallinero.com",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 # 📁 Archivos estáticos
 BASE_DIR = Path(__file__).resolve().parent.parent

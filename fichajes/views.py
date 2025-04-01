@@ -29,6 +29,7 @@ logger = logging.getLogger('fichajes')
 @api_view(["POST"])
 @permission_classes([AllowAny])  # 📌 Permitir acceso sin autenticación solo para fichar
 def fichar(request):
+    permission_classes = [IsAuthenticated]
     dni = request.data.get("dni", "").strip().upper()  # ✅ Normaliza el DNI
     if not dni:
         return Response({"error": "DNI requerido."}, status=400)
@@ -73,6 +74,7 @@ def fichar(request):
 
 
 class FichajeViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Fichaje.objects.select_related('empleado').all()
     serializer_class = FichajeSerializer
 

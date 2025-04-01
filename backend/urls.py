@@ -20,7 +20,6 @@ router.register(r'detalles-pedido', DetallePedidoViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
     path("fichajes/", include("fichajes.urls")),
     path("api/", include(router.urls)),
     path("api/", include("usuarios.urls")),
@@ -30,4 +29,6 @@ urlpatterns = [
 
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
+
 ]
