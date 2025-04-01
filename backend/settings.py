@@ -65,10 +65,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # 📦 Base de datos PostgreSQL
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 # 🔑 Usuario personalizado
@@ -96,7 +97,7 @@ SIMPLE_JWT = {
 
 # 🌍 CORS
 CORS_ALLOWED_ORIGINS = [
-    "https://www.grupogallinero.com",  # tu frontend en producción
+    "https://www.grupogallinero.com",
     "http://127.0.0.1:3000",
 ]
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { API } from "../config"; // 👈 Importamos las rutas
 import "../styles/modal.css";
+import { API } from "../config"; // 👈 Importamos las rutas
 
 function ContraseniaModal({ mostrar, onVerificada, onCancelar }) {
   const [password, setPassword] = useState("");
