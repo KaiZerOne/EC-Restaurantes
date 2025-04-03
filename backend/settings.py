@@ -98,7 +98,7 @@ SIMPLE_JWT = {
 # 🌍 CORS
 CORS_ALLOWED_ORIGINS = [
     "https://www.grupogallinero.com",
-    "http://127.0.0.1:3000",
+    "http://localhost:3000",  # Para desarrollo local
 ]
 
 CSRF_TRUSTED_ORIGINS = [

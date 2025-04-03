@@ -6,6 +6,7 @@ import FichajesDashboard from "./FichajesDashboard";
 import Fichar from "./Fichar";
 import NuevoEmpleado from "./NuevoEmpleado";
 import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -25,19 +26,42 @@ function App() {
         <>
           <Navbar logout={logout} setAutorizado={setAutorizado} />
           <Routes>
-            {/* 🚪 Redirige raíz a /fichar */}
             <Route path="/" element={<Navigate to="/fichar" />} />
 
+            {/* ✅ Pública */}
             <Route path="/fichar" element={<Fichar token={token} />} />
 
-            {/* 🔐 Rutas protegidas por contraseña */}
-            <Route path="/dashboard" element={autorizado ? <FichajesHome /> : <Navigate to="/fichar" />} />
-            <Route path="/fichajes" element={autorizado ? <FichajesDashboard token={token} /> : <Navigate to="/fichar" />} />
-            <Route path="/nuevo-empleado" element={autorizado ? <NuevoEmpleado token={token} /> : <Navigate to="/fichar" />} />
+            {/* 🔐 Protegidas */}
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute autorizado={autorizado}>
+                  <FichajesHome />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/fichajes"
+              element={
+                <PrivateRoute autorizado={autorizado}>
+                  <FichajesDashboard token={token} />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/nuevo-empleado"
+              element={
+                <PrivateRoute autorizado={autorizado}>
+                  <NuevoEmpleado token={token} />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </>
       ) : (
-        <Login setToken={setToken} />
+        <Routes>
+          <Route path="*" element={<Login setToken={setToken} />} />
+        </Routes>
       )}
     </Router>
   );

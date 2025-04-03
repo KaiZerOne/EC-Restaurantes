@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+
 
 function Login({ setToken }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const API_URL = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate(); // ⬅️ Hook para redirigir
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -21,6 +24,8 @@ function Login({ setToken }) {
             const accessToken = response.data.access;  // 📌 Guardamos el token de acceso
             setToken(accessToken);
             localStorage.setItem("token", accessToken);  // 📌 Guardamos el token en localStorage
+            navigate("/dashboard");
+
         } catch (err) {
             setError("Usuario o contraseña incorrectos");
         }
