@@ -15,7 +15,7 @@ function NuevoEmpleado() {
     });
 
     const [mensaje, setMensaje] = useState("");
-    const [token, setToken] = useState("");
+    const token = localStorage.getItem("token");
     const [restaurantes, setRestaurantes] = useState([
         { id: 1, nombre: "La Marina" },
         { id: 2, nombre: "Armentia" }
@@ -63,7 +63,7 @@ function NuevoEmpleado() {
         }
 
         try {
-            await axios.post("http://127.0.0.1:8000/api/usuarios/", dataToSend, {
+            await axios.post(API.USUARIOS, dataToSend, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setMensaje("Empleado añadido correctamente.");

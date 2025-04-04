@@ -14,6 +14,7 @@ function Fichar() {
         try {
         const response = await axios.post(API.FICHAR, { dni });
         setMensaje(response.data.mensaje);
+        localStorage.setItem("autorizado", "true");
         } catch (error) {
             setMensaje(error.response?.data?.error || "Error al fichar.");
         }

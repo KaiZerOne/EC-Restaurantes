@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import FichajesHome from "./FichajesHome";
@@ -22,16 +22,21 @@ function App() {
 
   return (
     <Router>
-      {token ? (
-        <>
-          <Navbar logout={logout} setAutorizado={setAutorizado} />
-          <Routes>
+      <Navbar logout={logout} setAutorizado={setAutorizado} />
+      <Routes>
+        {/* Si no hay token, siempre redirigir a login */}
+        {!token && (
+          <>
+            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login setToken={setToken} />} />
+          </>
+        )}
+
+        {/* Si hay token */}
+        {token && (
+          <>
             <Route path="/" element={<Navigate to="/fichar" />} />
-
-            {/* ✅ Pública */}
             <Route path="/fichar" element={<Fichar token={token} />} />
-
-            {/* 🔐 Protegidas */}
             <Route
               path="/dashboard"
               element={
@@ -56,13 +61,9 @@ function App() {
                 </PrivateRoute>
               }
             />
-          </Routes>
-        </>
-      ) : (
-        <Routes>
-          <Route path="*" element={<Login setToken={setToken} />} />
-        </Routes>
-      )}
+          </>
+        )}
+      </Routes>
     </Router>
   );
 }
