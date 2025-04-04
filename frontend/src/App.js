@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import FichajesHome from "./FichajesHome";
@@ -7,7 +7,6 @@ import Fichar from "./Fichar";
 import NuevoEmpleado from "./NuevoEmpleado";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -15,28 +14,18 @@ function App() {
 
   const logout = () => {
     setToken("");
-    localStorage.removeItem("token");
-    localStorage.removeItem("autorizado");
     setAutorizado(false);
+    localStorage.clear();
   };
 
   return (
     <Router>
-      <Navbar logout={logout} setAutorizado={setAutorizado} />
-      <Routes>
-        {/* Si no hay token, siempre redirigir a login */}
-        {!token && (
-          <>
-            <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login setToken={setToken} />} />
-          </>
-        )}
-
-        {/* Si hay token */}
-        {token && (
-          <>
+      {token ? (
+        <>
+          <Navbar logout={logout} setAutorizado={setAutorizado} />
+          <Routes>
             <Route path="/" element={<Navigate to="/fichar" />} />
-            <Route path="/fichar" element={<Fichar token={token} />} />
+            <Route path="/fichar" element={<Fichar />} />
             <Route
               path="/dashboard"
               element={
@@ -49,7 +38,7 @@ function App() {
               path="/fichajes"
               element={
                 <PrivateRoute autorizado={autorizado}>
-                  <FichajesDashboard token={token} />
+                  <FichajesDashboard />
                 </PrivateRoute>
               }
             />
@@ -57,13 +46,17 @@ function App() {
               path="/nuevo-empleado"
               element={
                 <PrivateRoute autorizado={autorizado}>
-                  <NuevoEmpleado token={token} />
+                  <NuevoEmpleado />
                 </PrivateRoute>
               }
             />
-          </>
-        )}
-      </Routes>
+          </Routes>
+        </>
+      ) : (
+        <Routes>
+          <Route path="*" element={<Login setToken={setToken} />} />
+        </Routes>
+      )}
     </Router>
   );
 }
